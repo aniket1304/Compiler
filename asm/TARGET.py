@@ -117,6 +117,7 @@ def final(i,c,rel):
         if j[0] in busy:
           z=busy[j[0]]
           x='STR '+z+' '+i[0]
+          busy[i[0]]=z
           asm.append(x)
           return
         else:
