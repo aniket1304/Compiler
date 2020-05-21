@@ -55,7 +55,7 @@ def load(x):
     return busy[x]
   f=fresh()
   busy[x]=f
-  y='LDR '+f+' '+x
+  y='LDR '+f+' ='+x
   asm.append(y)
   return f
 
@@ -123,7 +123,7 @@ def final(i,c,rel):
         else:
           f=fresh()
           busy[j[0]]=f
-          x='LDR '+f+' '+j[0]
+          x='LDR '+f+' ='+j[0]
           
           
           z='STR '+f+' '+i[0]
