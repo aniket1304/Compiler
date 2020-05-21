@@ -71,15 +71,47 @@ def final(i,c,rel):
     j=i[1]
     j=j.split(' ')    
     if len(j)==1:
-      #f=get_reg()      
+   
       if j[0].isnumeric():
-        f=fresh()
+        
+        fl=False
+        for key,value in busy.items():
+
+          if key==i[0]:
+                f=value
+                fl=True
+                break
+
+        if fl==False:
+          f=fresh()
+
         x='MOV '+f+' '+j[0]
-        z='STR '+f+' '+i[0]
+        #print(i)
+        try:
+          if i[0][0]!='t' and not(i[0][1].isnumeric()):
+
+
+            z='STR '+f+' '+i[0]
+            asm.append(x)
+            asm.append(z)
+          else:
+            asm.append(x)
+            #print(i)
+            #z='STR '+f+' '+i[0]
+            pass
+
+        except:
+          #print(i)
+          z='STR '+f+' '+i[0]
+          asm.append(x)
+          asm.append(z)
+
+
+
         busy[i[0]]=f
         #busy[j[0]]=f
-        asm.append(x)
-        asm.append(z)
+        #asm.append(x)
+        #asm.append(z)
         return
       else:
         if j[0] in busy:
@@ -89,7 +121,10 @@ def final(i,c,rel):
           return
         else:
           f=fresh()
+          busy[j[0]]=f
           x='LDR '+f+' '+j[0]
+          
+          
           z='STR '+f+' '+i[0]
           asm.append(x)
           asm.append(z)
@@ -102,8 +137,17 @@ def final(i,c,rel):
         break
     if rel==False:
       x=load(j[0])
+      #print(j)
       z=load(j[2])
-      des=fresh()
+      fl=False
+      for key,value in busy.items():
+        if key==i[0]:
+          fl=True
+          des=value
+
+      if fl==False:
+        des=fresh()
+
       op=arth[j[1]]
       z=op+' '+des+' '+x+' '+z
       asm.append(z)
@@ -163,3 +207,4 @@ for i in asm:
 print("\n\n\nRegister Index")
 for k,v in busy.items():
   print(v,":",k)
+#print(avail)
