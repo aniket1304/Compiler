@@ -87,6 +87,7 @@ def final(i,c,rel):
 
         x='MOV '+f+' '+j[0]
         #print(i)
+        '''
         try:
           if i[0][0]!='t' and not(i[0][1].isnumeric()):
 
@@ -105,13 +106,14 @@ def final(i,c,rel):
           z='STR '+f+' '+i[0]
           asm.append(x)
           asm.append(z)
+        '''
 
 
-
+        z='STR '+f+' '+i[0]
         busy[i[0]]=f
         #busy[j[0]]=f
-        #asm.append(x)
-        #asm.append(z)
+        asm.append(x)
+        asm.append(z)
         return
       else:
         if j[0] in busy:
