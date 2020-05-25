@@ -85,7 +85,7 @@ def final(i,c,rel):
         if fl==False:
           f=fresh()
 
-        x='MOV '+f+' '+j[0]
+        x='MOV '+f+' #'+j[0]
         #print(i)
         '''
         try:
@@ -119,8 +119,21 @@ def final(i,c,rel):
         if j[0] in busy:
           z=busy[j[0]]
           x='STR '+z+' '+i[0]
+
+          for key,value in busy.items():
+            if i[0]==key:
+              n='MOV '+value+' '+z
+              asm.append(x)
+              asm.append(n)
+              return
+
+
+
+
+          
           busy[i[0]]=z
           asm.append(x)
+          #asm.append(n)
           return
         else:
           f=fresh()
